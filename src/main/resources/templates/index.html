@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<title>Login</title>
+	<div th:replace="common/common-header :: common-header"/>
+
+</head>
+
+<body>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-7 col-sm-9 col-9">
+					<div class="card">
+						<div class="card-header h3 text-dark">Login</div>
+						<div class="card-body">
+							<form action="#" th:action="@{/login}" method="POST">
+
+								<div th:if="${param.error}">
+									<div class="alert alert-danger">Invalid username or
+										password.</div>
+								</div>
+								<div th:if="${param.logout}">
+									<div class="alert alert-info">You have been logged out.</div>
+								</div>
+									<div class="form-group">
+
+										<label for="username"
+											class="cols-sm-2 control-label h6 text-dark">username</label>
+										<div class="cols-sm-10">
+											<div class="input-group">
+												<span class="input-group-addon"><i
+													class="fa fa-users fa" aria-hidden="true"></i></span> <input
+													type="text" class="form-control" name="username"
+													id="username" placeholder="Enter your Username" required />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="password"
+											class="cols-sm-2 control-label h6 text-dark">password</label>
+										<div class="cols-sm-10">
+											<div class="input-group">
+												<span class="input-group-addon"><i
+													class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
+													type="password" class="form-control" name="password"
+													id="password" placeholder="Enter your Password" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group ">
+										<button type="submit" value="Submit"
+											class="btn btn-primary btn-lg btn-block login-button">Login</button>
+									</div>
+									<div class="login-register">
+										<a th:href="@{/user/register}">Register</a>
+									</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!--	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>-->
+<!--	<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>-->
+<!--	<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>-->
+
+</body>
+</html>

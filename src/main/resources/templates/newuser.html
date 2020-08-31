@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>New User</title>
+    <div th:replace="common/common-header :: common-header"/>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-sm-9 col-9">
+            <div class="card">
+                <div class="card-header h3 text-dark">Register</div>
+                <div class="card-body">
+
+                    <form action="#" th:action="@{/user/save}" th:object="${newUserModel}" method="POST">
+                        <div class="form-group">
+
+                            <label for="username"
+                                   class="cols-sm-2 control-label h6 text-dark">Username</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                            		<span class="input-group-addon">
+                                        <i class="fa fa-users fa" aria-hidden="true"></i>
+                                    </span>
+                                    <input
+                                            type="text" th:field="*{username}" class="form-control"
+                                            name="username" id="username"
+                                            placeholder="Enter your Username" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"
+                                   class="cols-sm-2 control-label h6 text-dark">Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="password" th:field="*{hashPass}" class="form-control"
+                                           name="password" id="password" placeholder="Enter your Password"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role"
+                                   class="cols-sm-2 control-label h6 text-dark">Account type</label>
+                            <select id="role" class="form-control" th:field=*{authorities}>
+                                <option
+                                        th:each="auth : ${authorityList}"
+                                        th:value="${auth.id}"
+                                        th:text="${auth.role}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group ">
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg btn-block login-button">Register
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="login-register">
+                        <a th:href="@{/}">Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

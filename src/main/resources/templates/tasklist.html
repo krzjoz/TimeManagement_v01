@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <title>Title</title>
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-light navbar-expand-xl"> 
+			<a class="navbar-brand" href="#"><img src="../img/watch.jpg" width="30" height="30" class="d-inline-block mr-1 align-top" alt=""> ToDoList</a>
+		
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="mainmenu">
+			
+				<ul class="navbar-nav mr-auto">
+					
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/new/add-task}" href="add.html"> Create List </a>
+					</li>
+					
+					<li class="nav-item active">
+						<a class="nav-link" th:href="@{/task/list}" href="list.html"> Lists </a>
+					</li>
+					
+				
+				</ul>
+			
+				<form class="form-inline">
+				
+					<input class="form-control mr-1" type="search" placeholder="Wyszukaj" aria-label="Wyszukaj">
+					<button class="btn btn-light" type="submit">Znajdź</button>
+				
+				</form>
+			
+			</div>
+		</nav>
+	
+	</header>
+	
+	<br><br/>
+	
+	
+<div class="container">
+<div class="row justify-content-center">
+                    <div class="col-lg-10 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header h2 text-dark">Task list</div>
+                            <div class="card-body">
+                            
+    <form action="#" th:action="@{/task/filter}" th:object="${taskModel}" method="POST">
+
+        <label for="taskCategory">Task category</label><br>
+        <select id="taskCategory" th:field=*{categoryId}>
+            <option th:each="category : ${categoryList}"
+                    th:value="${category.categoryId}"
+                    th:text="${category.categoryDesc}"></option>
+        </select>
+
+        <br><br>
+
+        <label for="taskStatus">Task status</label><br>
+        <select id="taskStatus" th:field="*{statusId}">
+            <option th:each="status : ${statusList}"
+                    th:value="${status.statusId}"
+                    th:text="${status.statusDesc}"></option>
+        </select>
+
+        <br>
+
+        <button class="btn btn-primary btn-sm" type="submit">Filter</button>
+    </form>
+
+    <br>
+
+    <form action="#" th:action="@{/task/reset}" method="POST">
+        <button class="btn btn-dark btn-sm" type="submit">Reset search criteria</button>
+    </form>
+
+    <br><br>
+
+    <table>
+        <tr>
+            <th>Task name</th>
+            <th>Category</th>
+            <th>Task description</th>
+            <th>Status</th>
+            <th>Date from</th>
+            <th>Date to</th>
+        </tr>
+        <tr th:each="task : ${taskList}">
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.categoryId.categoryDesc}"></td>
+            <td th:text="${task.taskDesc}"></td>
+            <td th:text="${task.statusId.statusDesc}"></td>
+            <td th:text="${#temporals.format(task.taskFromDate, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${#temporals.format(task.taskToDate, 'dd/MM/yyyy HH:mm')}"></td>
+<!--            <td>-->
+<!--                <a -->
+<!--                        class="btn btn-primary btn-sm"-->
+<!--                        data-toggle="modal"-->
+<!--                        data-target="#updateModal">-->
+<!--                Update-->
+<!--            </a>-->
+<!--                <div th:replace="common/common-modal :: update-modal"/>-->
+<!--            </td>-->
+<!--            -->
+            <td><a href="#" th:href="@{/task/delete(taskId=${task.taskId})}"
+                   class="btn btn-dark btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete task?'))) return false">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+    <a th:href="@{/new/add-task}">
+        <button class="btn btn-dark btn-sm" type="submit">Add new task</button>
+    </a>
+
+    <p><a th:href="@{/logout}">Logout</a></p>
+
+  </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+</body>
+</html>

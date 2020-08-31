@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Task added</title>
+    <div th:replace="common/common-header :: common-header"/>
+</head>
+<body>
+
+<h2>Task Added</h2>
+<div class = "container">
+    <a th:href="@{/task/list}">
+        <button class="btn btn-dark btn-lg" type="submit">Go to Task List</button>
+    </a>
+
+
+    <a th:href="@{/new/add-task}">
+        <button class="btn btn-primary btn-lg" type="submit">Add new task</button>
+    </a>
+</div>
+
+</body>
+</html>

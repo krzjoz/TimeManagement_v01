@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<body>
+
+<div th:fragment="update-modal">
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" th:object="${foundTaskModel}" method="POST">
+                    <div class="modal-body">
+                        <label for="taskName">Task name</label><br>
+                        <input type="text" th:field="*{taskName}" id="taskName"/>
+                        <br>
+                        <label for="taskDesc">Task Description</label><br>
+                        <textarea type="text" th:field="*{taskDesc}" rows="4" cols="50" id="taskDesc"/>
+                        <br>
+                        <label for="taskCategory">Task category</label><br>
+                        <select id="taskCategory" th:field="*{categoryId}">
+                            <option th:each="category : ${categoryList}"
+                                    th:value="${category.categoryId}"
+                                    th:text="${category.categoryDesc}"></option>
+                        </select>
+                        </br>
+                        <label for="taskStatus">Task status</label><br>
+                        <select id="taskStatus" th:field="*{statusId}">
+                            <option th:each="status : ${statusList}"
+                                    th:value="${status.statusId}"
+                                    th:text="${status.statusDesc}"></option>
+                        </select>
+                        <br>
+                        <label for="taskFromDate">Date from</label><br>
+                        <input type="datetime-local"
+                               th:field="*{taskFromDate}"
+                               id="taskFromDate" name="taskFromDate"/>
+
+                        <br>
+
+                        <label for="taskToDate">Date to</label><br>
+                        <input type="datetime-local"
+                               th:field="*{task.taskToDate}"
+                               id="taskToDate" name="taskToDate"/>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--modal end-->
+
+</div>
+</body>
+</html>
+
+
+

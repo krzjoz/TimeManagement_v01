@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+
+    <title>Add ToDo</title>
+    <div th:replace="common/common-header :: common-header"/>
+</head>
+<body>
+	<header>
+		<nav class="navbar bg-light navbar-expand-lg"> 
+			<a class="navbar-brand" href="#"><img src="../img/watch.jpg" width="30" height="30" class="d-inline-block mr-1 align-top" alt=""> ToDoList</a>
+		
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Prze³¹cznik nawigacji">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="mainmenu">
+			
+				<ul class="navbar-nav mr-auto">
+					
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/new/add-task}" href="add.html"> Create List </a>
+					</li>
+					
+					<li class="nav-item active">
+						<a class="nav-link" th:href="@{/task/list}" href="list.html"> Lists </a>
+					</li>
+					
+				
+				</ul>
+			
+				<form class="form-inline">
+				
+					<input class="form-control mr-1" type="search" placeholder="Wyszukaj" aria-label="Wyszukaj">
+					<button class="btn btn-light" type="submit">Znajdz</button>
+				
+				</form>
+			
+			</div>
+		
+		</nav>
+	
+	</header>
+	
+	<br><br/>
+	
+	<main>
+<div class="container">
+
+<div class="row justify-content-center">
+                    <div class="col-lg-7 col-sm-7 col-9">
+                        <div class="card">
+                            <div class="card-header h2 text-dark">Add new task</div>
+                            <div class="card-body">
+
+<form class="form-horizontal" action="#" th:action="@{/new/save}" th:object="${newTask}" method="POST">
+
+   <div class="form-group">
+                                        <label for="taskName" class="cols-sm-2 control-label mt-1 form- h6 text-dark">Task Name</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control"  name="name" id="taskName" th:field="*{taskName}" placeholder="Enter your task name" required />
+                                            </div>
+                                        </div>
+                                    </div>
+									<div class="form-group">
+                                        <label for="email" class="cols-sm-2 control-label h6 text-dark">Task description</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" name="description" id="taskDesc" th:field="*{taskDesc}" placeholder="Task description"  />
+                                            </div>
+                                        </div>
+                                    </div>
+	
+
+     
+ 	<label for="taskStatus" class="cols-sm-2 control-label mt-1 form- h6 text-dark">Category</label><br>
+    <select id="taskCategory" th:field="*{categoryId}" required>
+        <option th:each="category : ${categoryList}"
+                th:value="${category.categoryId}"
+                th:text="${category.categoryDesc}"></option>
+    </select>
+
+    </br></br>                                 
+
+    <label for="taskStatus" class="cols-sm-2 control-label mt-1 form- h6 text-dark">Task status</label><br>
+    <select id="taskStatus" th:field="*{statusId}" required>
+        <option th:each="status : ${statusList}"
+                th:value="${status.statusId}"
+                th:text="${status.statusDesc}"></option>
+    </select>
+
+    <br><br>
+
+    <label for="taskFromDate" class="cols-sm-2 control-label mt-1 form- h6 text-dark">Date from</label><br>
+    <input type="datetime-local"
+           th:field="*{taskFromDate}"
+           id="taskFromDate" name="taskFromDate" required/>
+
+    <br>
+
+    <label for="taskToDate" class="cols-sm-2 control-label mt-1 form- h6 text-dark">Date to</label><br>
+    <input type="datetime-local"
+           th:field="*{taskToDate}"
+           id="taskToDate" name="taskToDate" required/>
+
+    <br><br>
+
+    <button class="btn btn-dark btn-sm" type="submit">Add Task</button>
+
+
+</form>
+
+						    </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+<main/>
+</body>
+</html>
